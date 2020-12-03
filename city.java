@@ -1,39 +1,46 @@
 import java.util.*;
-public class city {
+//city class
+public class city implements Comparable<city> {
 	String name;
-	List<edge> edges = new ArrayList<edge>();
+	List<edges> edge = new ArrayList<edges>();
 	List<String> attractions = new ArrayList<String>();
-	public class edge{
-		String name;
-		int miles;
-		int time;
-		edge(String n, int m, int t){
-			name = n;
-			miles = m;
-			time = t;
-		}
-	}
+	int weight = Integer.MAX_VALUE;
+	boolean visited = false;
+	
 	city(){
 		name = null;
-		edges = new ArrayList<edge>();
+		edge = new ArrayList<edges>();
 	}
 	city(String n){
 		name = n;
-		edges = new ArrayList<edge>();
+		edge = new ArrayList<edges>();
 	}
 	city(String n, ArrayList a){
 		name = n;
-		edges = new ArrayList<edge>(a.size());
+		edge = new ArrayList<edges>(a.size());
 		for(int i = 0; i < a.size(); i++) {
-			edges.addAll(a);
+			edge.addAll(a);
 		}
 	}
 	void setName(String n) {name = n;}
 	String getName() {return name;}
 	
 	void newEdge(String n, int m, int t) {
-		edge nedge = new edge(n , m, t);
-		edges.add(nedge);
+		edges nedge = new edges(n , m, t);
+		edge.add(nedge);
 	}
 	
+	@Override
+	public int compareTo(city o) {
+		if(this.weight < o.weight) {
+			return -1;
+		}
+		else if(this.weight > o.weight) {
+			return 1;
+		}
+		else return 0;
+	}
+	/*public int compareTo(city o) {
+		return Integer.compare(this.weight, o.weight);
+	}*/
 	}
